@@ -12,8 +12,10 @@ public abstract class SmartEnum<T> where T : SmartEnum<T>
     public static Result<T?> Create(string? name)
     {
         if (string.IsNullOrEmpty(name))
+        {
             return Result.Success<T?>(null);
-        
+        }
+
         T? match = All.FirstOrDefault(x => x.Name == name);
         return match is not null
             ? Result.Success<T?>(match)
@@ -22,7 +24,8 @@ public abstract class SmartEnum<T> where T : SmartEnum<T>
 
     public static IReadOnlyList<T> All =>
         typeof(T)
-            .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.DeclaredOnly)
+            .GetFields(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static |
+                       System.Reflection.BindingFlags.DeclaredOnly)
             .Where(f => f.FieldType == typeof(T))
             .Select(f => (T)f.GetValue(null)!)
             .ToList();
