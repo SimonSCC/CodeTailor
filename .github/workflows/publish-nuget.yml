@@ -1,13 +1,15 @@
-name: Publish to NuGet
+name: Build and Publish
 
 on:
+  pull_request:
+    branches: [ main ]
   push:
-    tags:
-      - 'v*.*.*'  # Triggers on version tags like v1.0.0, v1.2.3, etc.
+    branches: [ main ]
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
 
     steps:
     - name: Checkout code
@@ -24,6 +26,44 @@ jobs:
     - name: Build
       run: dotnet build CodeTailor.sln --configuration Release --no-restore
 
+    - name: Test
+      run: dotnet test CodeTailor.sln --configuration Release --no-build --verbosity normal
+
+  publish:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Generate version number
+      id: version
+      run: |
+        # Use date-based versioning: 1.0.YYYYMMDD.build_number
+        DATE_VERSION=$(date +'%Y%m%d')
+        VERSION="1.0.$DATE_VERSION.${{ github.run_number }}"
+        echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+        echo "Publishing version: $VERSION"
+
+    - name: Update project versions
+      run: |
+        # Update all .csproj files with new version
+        find src -name "*.csproj" -type f -exec sed -i "s/<Version>.*<\/Version>/<Version>${{ steps.version.outputs.VERSION }}<\/Version>/g" {} \;
+
+    - name: Restore dependencies
+      run: dotnet restore CodeTailor.sln
+
+    - name: Build
+      run: dotnet build CodeTailor.sln --configuration Release --no-restore
+
     - name: Pack
       run: dotnet pack CodeTailor.sln --configuration Release --no-build --output ./nupkg
 
@@ -33,6 +73,8 @@ jobs:
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: v${{ steps.version.outputs.VERSION }}
+        name: Release v${{ steps.version.outputs.VERSION }}
         files: ./nupkg/*.nupkg
         generate_release_notes: true
       env:
