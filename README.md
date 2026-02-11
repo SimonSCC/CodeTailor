@@ -1,37 +1,80 @@
 # CodeTailor
 
-[![NuGet](https://img.shields.io/nuget/v/CodeTailor.svg)](https://www.nuget.org/packages/CodeTailor/)
+[![NuGet](https://img.shields.io/nuget/v/CodeTailor.Domain.svg)](https://www.nuget.org/packages/CodeTailor.Domain/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> A curated collection of common utilities and classes tailored for everyday development.
+> A curated collection of Clean Architecture utilities and patterns tailored for everyday development.
 
-**CodeTailor** provides battle-tested helpers, extensions, and patterns to streamline your .NET projects. Stop rewriting the same utility code across projects—let CodeTailor handle the common stuff so you can focus on what makes your application unique.
+**CodeTailor** provides battle-tested helpers, base classes, and patterns organized by Clean Architecture layers. Stop rewriting the same boilerplate across projects—let CodeTailor handle the common stuff so you can focus on what makes your application unique.
 
 ## Installation
 
+CodeTailor is organized by Clean Architecture layers. Install only the layers you need:
+
 ```bash
-dotnet add package CodeTailor
+# Domain Layer - Entities, Value Objects, Domain Events
+dotnet add package CodeTailor.Domain
+
+# Application Layer - CQRS, Commands, Queries, Use Cases
+dotnet add package CodeTailor.Application
+
+# Infrastructure Layer - Data Access, Repositories, External Services
+dotnet add package CodeTailor.Infrastructure
+
+# Presentation Layer - API Controllers, View Models, DTOs
+dotnet add package CodeTailor.Presentation
+
+# Testing - Test Utilities, Builders, Fakes
+dotnet add package CodeTailor.Testing
 ```
 
-Or via NuGet Package Manager:
+## Packages
 
-```
-Install-Package CodeTailor
-```
+Organized following Clean Architecture principles:
 
-## Features
+### 🎯 CodeTailor.Domain
+The innermost layer - your business logic core:
+- **Entities** - Base entity classes with domain events
+- **Value Objects** - Immutable value object helpers
+- **Domain Events** - Event-driven domain patterns
+- **Aggregates** - Aggregate root patterns
 
-Coming soon! This package will include:
+### 💼 CodeTailor.Application
+Use cases and business workflows:
+- **CQRS** - Command and Query patterns
+- **Commands/Queries** - Base classes for CQRS
+- **Use Cases** - Application service patterns
+- **Behaviors** - Pipeline behaviors (validation, logging, etc.)
 
-- 🛠️ **Extension Methods** - Helpful extensions for common types
-- 🔧 **Utilities** - Frequently needed helper classes
-- 📦 **Patterns** - Reusable design patterns and abstractions
-- ✨ And more...
+### 🏗️ CodeTailor.Infrastructure
+External concerns and persistence:
+- **Repositories** - Repository pattern implementations
+- **Data Access** - EF Core helpers and patterns
+- **External Services** - Integration patterns
+- **Caching** - Caching utilities
+
+### 🌐 CodeTailor.Presentation
+Web API and UI concerns:
+- **API Controllers** - Base controller classes
+- **View Models** - DTO and ViewModel patterns
+- **Mapping** - Object mapping utilities
+- **Validation** - Input validation helpers
+
+### 🧪 CodeTailor.Testing
+Make testing easier:
+- **Test Builders** - Fluent builders for test data
+- **Fakes** - In-memory implementations
+- **Assertions** - Custom test assertions
+- **Fixtures** - Reusable test setups
 
 ## Usage
 
 ```csharp
-using CodeTailor;
+using CodeTailor.Domain;
+using CodeTailor.Application;
+using CodeTailor.Infrastructure;
+using CodeTailor.Presentation;
+using CodeTailor.Testing;
 
 // Examples will be added as utilities are implemented
 ```

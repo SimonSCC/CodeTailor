@@ -6,23 +6,24 @@
     <Nullable>enable</Nullable>
 
     <!-- NuGet Package Metadata -->
-    <PackageId>CodeTailor</PackageId>
+    <PackageId>CodeTailor.Testing</PackageId>
     <Version>1.0.0</Version>
     <Authors>SimonSCC</Authors>
     <Company>SimonSCC</Company>
-    <Description>A curated collection of common utilities and classes tailored for everyday development. CodeTailor provides battle-tested helpers, extensions, and patterns to streamline your .NET projects.</Description>
+    <Description>Testing utilities and helpers for CodeTailor toolkit. Includes test builders, fakes, custom assertions, and testing patterns.</Description>
     <PackageProjectUrl>https://github.com/SimonSCC/CodeTailor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SimonSCC/CodeTailor</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>utilities;helpers;extensions;common;toolkit</PackageTags>
+    <PackageTags>testing;test-helpers;builders;fakes;assertions</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="../../README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

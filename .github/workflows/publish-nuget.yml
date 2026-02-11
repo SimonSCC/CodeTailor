@@ -19,13 +19,13 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore CodeTailor/CodeTailor.csproj
+      run: dotnet restore CodeTailor.sln
 
     - name: Build
-      run: dotnet build CodeTailor/CodeTailor.csproj --configuration Release --no-restore
+      run: dotnet build CodeTailor.sln --configuration Release --no-restore
 
     - name: Pack
-      run: dotnet pack CodeTailor/CodeTailor.csproj --configuration Release --no-build --output ./nupkg
+      run: dotnet pack CodeTailor.sln --configuration Release --no-build --output ./nupkg
 
     - name: Publish to NuGet
       run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

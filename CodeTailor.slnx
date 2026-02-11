@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/CodeTailor.Application/CodeTailor.Application.csproj" />
+    <Project Path="src/CodeTailor.Domain/CodeTailor.Domain.csproj" />
+    <Project Path="src/CodeTailor.Infrastructure/CodeTailor.Infrastructure.csproj" />
+    <Project Path="src/CodeTailor.Presentation/CodeTailor.Presentation.csproj" />
+    <Project Path="src/CodeTailor.Testing/CodeTailor.Testing.csproj" />
+  </Folder>
+</Solution>
