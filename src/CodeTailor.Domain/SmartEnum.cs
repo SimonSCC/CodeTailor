@@ -15,6 +15,7 @@ public abstract class SmartEnum<T> where T : SmartEnum<T>
         {
             return Result.Success<T?>(null);
         }
+        
 
         T? match = All.FirstOrDefault(x => x.Name == name);
         return match is not null
