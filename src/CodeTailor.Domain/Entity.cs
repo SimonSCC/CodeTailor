@@ -7,6 +7,7 @@ public abstract class Entity
     public IReadOnlyCollection<IDomainEvent> GetDomainEvents() => _domainEvents;
 
     protected void Raise(IDomainEvent domainEvent)
+    
     {
         _domainEvents.Add(domainEvent);
     }
