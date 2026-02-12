@@ -67,26 +67,6 @@ Make testing easier:
 - **Assertions** - Custom test assertions
 - **Fixtures** - Reusable test setups
 
-## Usage
-
-```csharp
-using CodeTailor.Domain;
-using CodeTailor.Application;
-using CodeTailor.Infrastructure;
-using CodeTailor.Presentation;
-using CodeTailor.Testing;
-
-// Examples will be added as utilities are implemented
-```
-
-## Contributing
-
-Contributions are welcome! Feel free to:
-
-- Report bugs
-- Suggest new utilities
-- Submit pull requests
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
